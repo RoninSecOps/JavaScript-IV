@@ -18,23 +18,23 @@ Prototype Refactor
 
 // EXAMPLE SOLUTION CODE:
 function Airplane(name) {
-    this.name = name;
-    this.isFlying = false;
-  }
-  Airplane.prototype.takeOff = function() {
-    this.isFlying = true;
-  };
-  Airplane.prototype.land = function() {
-    this.isFlying = false;
-  };
-  
-  /*
+  this.name = name;
+  this.isFlying = false;
+}
+Airplane.prototype.takeOff = function() {
+  this.isFlying = true;
+};
+Airplane.prototype.land = function() {
+  this.isFlying = false;
+};
+
+/*
   // 👇 COMPLETE YOUR WORK BELOW 👇
   // 👇 COMPLETE YOUR WORK BELOW 👇
   // 👇 COMPLETE YOUR WORK BELOW 👇
   */
-  
-  /*
+
+/*
     TASK 1
       - Write a Person Constructor that initializes `name` and `age` from arguments.
       - All instances of Person should initialize with an empty `stomach` array.
@@ -46,30 +46,27 @@ function Airplane(name) {
       - Give instances of Person a method `.toString()`:
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
-  
-  function Person(name, age) {
-    this.name = name;
-    this.age = age;
-    this.stomach = [];
+
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+}
+Person.prototype.eat = function(foodEat) {
+  if (this.stomach.length < 10) {
+    this.stomach.push(foodEat);
   }
-  Person.prototype.eat = function(foodEat) {
-    if (this.stomach.length < 10) {
-      this.stomach.push(foodEat);
-    }
-  };
-  Person.prototype.poop = function() {
-    this.stomach = [];
-  };
-  Person.prototype.toString = function() {
-    return `${this.name}, ${this.age}`;
-  };
-  
-  const mary = new Person({
-    name: "Mary",
-    age: 50
-  });
-  
-  /*
+};
+Person.prototype.poop = function() {
+  this.stomach = [];
+};
+Person.prototype.toString = function() {
+  return `${this.name}, ${this.age}`;
+};
+
+const mary = new Person('Mary', 50);
+
+/*
     TASK 2
       - Write a Car constructor that initializes `model` and `milesPerGallon` from arguments.
       - All instances built with Car:
@@ -82,48 +79,48 @@ function Airplane(name) {
       - A car which runs out of `fuel` while driving can't drive any more distance:
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
-  
-  function Car(model, milesPerGallon) {
-    this.model = model;
-    this.milesPerGallon = milesPerGallon;
+
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
+}
+
+Car.prototype.fill = function(gallons) {
+  this.tank = this.tank + gallons;
+};
+
+Car.prototype.drive = function(distance) {
+  if (distance / this.milesPerGallon <= this.tank) {
+    this.odometer = this.odometer + distance;
+    this.tank = this.tank - distance / this.milesPerGallon;
+  } else {
+    this.odometer = this.odometer + this.tank * this.milesPerGallon;
     this.tank = 0;
-    this.odometer = 0;
+    return `I ran out of fuel at ${this.odometer} miles!`;
   }
-  
-  Car.prototype.fill = function(gallons) {
-    this.tank = this.tank + gallons;
-  };
-  
-  Car.prototype.drive = function(distance) {
-    if (distance / this.milesPerGallon <= this.tank) {
-      this.odometer = this.odometer + distance;
-      this.tank = this.tank - distance / this.milesPerGallon;
-    } else {
-      this.odometer = this.odometer + this.tank * this.milesPerGallon;
-      this.tank = 0;
-      return `I ran out of fuel at ${this.odometer} miles!`;
-    }
-  };
-  
-  /*
+};
+
+/*
     TASK 3
       - Write a Baby constructor subclassing Person.
       - Besides `name`, Baby takes a second argument to initialize `favoriteToy`.
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
-  
-  function Baby(name, favoriteToy) {
-    Person.call(this, name);
-    this.favoriteToy = favoriteToy;
-  }
-  
-  Baby.prototype = Object.create(Person.prototype);
-  
-  Baby.prototype.play = function() {
-    return `Playing with ${this.favoriteToy}`;
-  };
-  /* 
+
+function Baby(name, favoriteToy) {
+  Person.call(this, name);
+  this.favoriteToy = favoriteToy;
+}
+
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function() {
+  return `Playing with ${this.favoriteToy}`;
+};
+/* 
       TASK 4
     
       In your own words explain the four principles for the "this" keyword below:
@@ -132,5 +129,3 @@ function Airplane(name) {
       3.  Explicit Binding - giving (binding) the value of "this"
       4.  New Binding -"this" refers to the new object instance being created
     */
-
-  

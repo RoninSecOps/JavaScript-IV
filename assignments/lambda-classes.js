@@ -1,8 +1,8 @@
 // CODE here for your Lambda Classes
 class Person {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
+  constructor(attr) {
+    this.name = attr.name;
+    this.age = attr.age;
     this.stomach = [];
   }
   eat(foodEat) {
@@ -19,7 +19,7 @@ class Person {
 }
 
 // const mary = new Person('Mary', 50);
-const mary = new Person("Mary",50);
+const mary = new Person({name:"Mary", age:50});
 class Car {
   constructor(model, milesPerGallon) {
     this.model = model;
