@@ -5,7 +5,7 @@ class Person {
     this.age = age;
     this.stomach = [];
   }
-  function(foodEat) {
+  eat(foodEat) {
     if (this.stomach.length < 10) {
       this.stomach.push(foodEat);
     }
