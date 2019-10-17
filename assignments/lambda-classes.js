@@ -18,8 +18,8 @@ class Person {
   }
 }
 
-const mary = new Person('Mary', 50);
-
+// const mary = new Person('Mary', 50);
+const mary = new Person("Mary",50);
 class Car {
   constructor(model, milesPerGallon) {
     this.model = model;
@@ -43,8 +43,8 @@ class Car {
 }
 
 class Baby extends Person {
-  constructor(name, favoriteToy) {
-    super(name, favoriteToy);
+  constructor(name,age, favoriteToy) {
+    super(name, age);
     this.favoriteToy = favoriteToy;
   }
   play() {
@@ -52,3 +52,8 @@ class Baby extends Person {
   }
 }
 
+const child = new Baby('Kate', 5, 'car');
+  console.log(Person);
+  console.log(child)
+  console.log(Baby);
+  console.log(mary);
